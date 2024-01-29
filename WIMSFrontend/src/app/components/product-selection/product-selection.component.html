@@ -1,0 +1,12 @@
+<h1>Products:</h1>
+<form [formGroup]="productSelectionForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="productId">Product ID</label>
+    <input type="text" class="form-control" id="productId" formControlName="productId" required>
+  </div>
+  <div class="form-group">
+    <label for="storageLocation">Storage Location</label>
+    <input type="text" class="form-control" id="storageLocation" formControlName="storageLocation" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
