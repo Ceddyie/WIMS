@@ -1,0 +1,26 @@
+.home-btns {
+    text-align: center;
+}
+
+.pbutton {
+    margin: 1em;
+    background-color: #a1a6ab;
+    border: none;
+    width: 150px;
+    height: 150px;
+    transition: 0.1s;
+    display: inline;
+    color: #f3f3f3;
+    font-size: 1.1em;
+    border-radius: 10px;
+}
+
+.pbutton:hover {
+    background-color: #f3f3f3;
+    color: black;
+    border: 1px solid black;
+}
+
+.material-symbols-outlined {
+    font-size: 5em;
+}

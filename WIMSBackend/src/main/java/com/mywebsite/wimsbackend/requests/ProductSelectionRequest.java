@@ -18,19 +18,14 @@ public class ProductSelectionRequest {
     @Column
     private String productName;
 
-    @Column
-    private String storageLocation;
-
-    @Column
     private int amount;
 
     public ProductSelectionRequest() {
 
     }
 
-    public ProductSelectionRequest(String productId, String storageLocation, int amount) {
+    public ProductSelectionRequest(String productId, int amount) {
         this.productId = productId;
-        this.storageLocation = storageLocation;
         this.amount = amount;
     }
 }

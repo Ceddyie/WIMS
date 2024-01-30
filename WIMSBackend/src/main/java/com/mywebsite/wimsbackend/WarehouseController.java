@@ -3,7 +3,12 @@ package com.mywebsite.wimsbackend;
 import com.mywebsite.wimsbackend.requests.ProductSelectionRequest;
 import com.mywebsite.wimsbackend.requests.StorageAssignmentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/warehouse")
@@ -13,9 +18,11 @@ public class WarehouseController {
     private KafkaProducerService kafkaProducerService;
 
     @PostMapping("/selectProduct")
-    public String selectProduct(@RequestBody ProductSelectionRequest request) {
-        kafkaProducerService.sendProductSelectionEvent(request.getProductId(), request.getStorageLocation());
-        return "Product selected successfully!";
+    public ResponseEntity<Map<String, String>> selectProduct(@RequestBody ProductSelectionRequest request) {
+        kafkaProducerService.sendProductSelectionEvent(request.getProductId(), request.getAmount());
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Product selected successfully!");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/assignStorage")

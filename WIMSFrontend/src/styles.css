@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+    height: 100%;
+    min-width: 302px;
+}
+
+body {
+    user-select: none;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: fit-content;
+    padding-bottom: 1rem
+
+}
+
+.contentPane {
+    width: auto;
+    overflow: hidden;
+    padding: 2rem 0.5rem;
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    align-content: space-between;
+    min-height: 100%;
+}
+
+.material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 48
+}
+
+footer {
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    background-color: #FFFFFF;
+    width: 100%;
+    z-index: 101;
+}
+
+footer, .push {
+    height: 2rem;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

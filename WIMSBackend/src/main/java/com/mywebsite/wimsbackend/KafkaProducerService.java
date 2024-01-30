@@ -12,8 +12,8 @@ public class KafkaProducerService {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendProductSelectionEvent(String productId, String storageLocation) {
-        String message = "Product selected: " + productId + ", StorageLocation: " + storageLocation;
+    public void sendProductSelectionEvent(String productId, int amount) {
+        String message = productId + ":" + amount;
         kafkaTemplate.send(PRODUCT_SELECTION_TOPIC, message);
     }
 
