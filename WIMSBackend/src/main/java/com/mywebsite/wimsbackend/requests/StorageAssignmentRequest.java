@@ -17,6 +17,8 @@ public class StorageAssignmentRequest {
     @Column
     private String productId;
 
+    @Column
+    private int amount;
 
     public StorageAssignmentRequest() {}
 

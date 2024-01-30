@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaProducerService {
-    private static final String PRODUCT_SELECTION_TOPIC = "product_selection_topic";
-    private static final String STORAGE_ASSIGNMENT_TOPIC = "storage_assignment_topic";
+    private static final String PRODUCT_SELECTION_TOPIC = "product_selection_1";
+    private static final String STORAGE_ASSIGNMENT_TOPIC = "storage_assignment_1";
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;

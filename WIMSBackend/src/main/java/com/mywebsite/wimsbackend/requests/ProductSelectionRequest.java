@@ -7,17 +7,16 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Entity
 @Table(name = "product")
 public class ProductSelectionRequest {
 
-    @Id
     @Column
     private String productId;
 
     @Column
     private String productName;
 
+    @Column
     private int amount;
 
     public ProductSelectionRequest() {

@@ -33,7 +33,6 @@ export class ProductSelectionComponent implements OnInit{
       response => {
         console.log(response.body);
         if(response.ok) {
-          this.showLabel = true;
           this.openSnackBar("Request sent", "Okay");
           this.productSelectionForm.reset();
         }
@@ -46,8 +45,7 @@ export class ProductSelectionComponent implements OnInit{
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000,
-      verticalPosition: 'top'
+      duration: 3000
     });
   }
 }
