@@ -5,6 +5,7 @@ import com.mywebsite.wimsbackend.requests.StorageAssignmentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -16,6 +17,9 @@ import java.util.Map;
 public class WarehouseController {
     @Autowired
     private KafkaProducerService kafkaProducerService;
+
+    @Autowired
+    private KafkaConsumerComponent kafkaConsumerComponent;
 
     @PostMapping("/selectProduct")
     public ResponseEntity<Map<String, String>> selectProduct(@RequestBody ProductSelectionRequest request) {
@@ -30,4 +34,9 @@ public class WarehouseController {
         kafkaProducerService.sendStorageAssignmentEvent(request.getStorageLocation(), request.getProductId());
         return "Storage assigned successfully";
     }
+
+    /*@GetMapping("/selectionMessage")
+    public ResponseEntity<String> getKafkaMessages() {
+        return new ResponseEntity<>(kafkaConsumerComponent.getKafkaSelectionMessage(), HttpStatus.CONTINUE);
+    }*/
 }

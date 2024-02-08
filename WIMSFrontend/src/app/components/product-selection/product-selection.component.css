@@ -11,3 +11,7 @@
     /* But also accounting for potential margin-bottom of last child */
     margin-bottom: -2rem;
 }
+
+.snackBar {
+    background-color: blue;
+}
