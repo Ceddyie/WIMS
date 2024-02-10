@@ -1,5 +1,7 @@
 package com.mywebsite.wimsbackend;
 
+import com.mywebsite.wimsbackend.KafkaConsumerComponent;
+import com.mywebsite.wimsbackend.KafkaProducerService;
 import com.mywebsite.wimsbackend.requests.ProductSelectionRequest;
 import com.mywebsite.wimsbackend.requests.StorageAssignmentRequest;
 import org.springframework.beans.factory.annotation.Autowired;

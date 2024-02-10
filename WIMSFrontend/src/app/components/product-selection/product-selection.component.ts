@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
-import {Subject, takeUntil} from "rxjs";
-import {RxStompService} from "@stomp/ng2-stompjs";
-import {Message} from "@stomp/stompjs";
+import {WebSocketAPI} from "../../WebSocketAPI";
+import {ProductSelectionDialogComponent} from "../product-selection-dialog/product-selection-dialog.component";
+
 
 @Component({
   selector: 'app-product-selection',
@@ -18,61 +18,68 @@ import {Message} from "@stomp/stompjs";
 })
 export class ProductSelectionComponent implements OnInit, OnDestroy {
   productSelectionForm!: FormGroup;
-  messages!: string[];
-  private destroy$ = new Subject();
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _matDialog: MatDialog, private rxStompService: RxStompService) {
+  webSocketAPI!: WebSocketAPI;
+
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _matDialog: MatDialog) {
     console.log("1");
   }
-
-  ngOnDestroy(): void {
-        this.destroy$.next(null);
-        this.destroy$.unsubscribe();
-    }
 
   ngOnInit(): void {
     this.productSelectionForm = this.formBuilder.group({
       productId: [''],
       amount: ['']
     });
-    this.messages = [];
-    this.rxStompService.watch('/topic/productSelection').pipe(takeUntil(this.destroy$))
-        .subscribe((message: Message) => {
-          console.log('Received from websocket: ' + message.body);
-          this.messages.push(message.body);
-          this.messages = this.messages.slice(-5);
-        });
+    this.webSocketAPI = new WebSocketAPI(new ProductSelectionComponent(this.http, this.formBuilder, this._snackBar, this._matDialog))
+    this.connect();
+  }
+  ngOnDestroy() {
+    this.webSocketAPI._disconnect();
   }
 
-  showLabel = false;
+  connect() {
+    this.webSocketAPI._connect();
+  }
+
   onSubmit(): void {
     const productId = this.productSelectionForm.get('productId')?.value;
     const amount = this.productSelectionForm.get('amount')?.value;
 
     this.http.post('http://localhost:8080/warehouse/selectProduct', { productId, amount }, {observe: "response"}).subscribe(
-      response => {
-        console.log(response.body);
-        if(response.ok) {
-          this.openSnackBar("Request sent", "Okay");
-          this.productSelectionForm.reset();
-
+        response => {
+          console.log(response.body);
+          if(response.ok) {
+            this.openSnackBar("Request sent", "Okay");
+            this.productSelectionForm.reset();
+          }
+        },
+        error => {
+          console.log('Error', error.message);
         }
-      },
-      error => {
-        console.log('Error', error.message);
-      }
     );
   }
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      panelClass: ['snackBar'],
       duration: 3000
     });
   }
 
-  private openDialog(message: string): void {
-    this._matDialog.open(ProductSelectionComponent, {
-      data: { message },
+  openDialog(message: string) {
+    const dialogRef = this._matDialog.open(ProductSelectionDialogComponent, {
+      width: '250px',
+      data: message
     });
   }
+
+  private _openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      verticalPosition: "top",
+    });
+  }
+
+  /*handleMessage(message: string) {
+    console.log("Message received: " + message)
+    this.openDialog(message);
+  }*/
 }
