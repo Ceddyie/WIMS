@@ -5,6 +5,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {WebSocketAPI} from "../../WebSocketAPI";
 import {ProductSelectionDialogComponent} from "../product-selection-dialog/product-selection-dialog.component";
+import {Router, RouterLink} from "@angular/router";
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ProductSelectionComponent implements OnInit, OnDestroy {
   productSelectionForm!: FormGroup;
   webSocketAPI!: WebSocketAPI;
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _matDialog: MatDialog) {
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _matDialog: MatDialog, private router: Router) {
     console.log("1");
   }
 
@@ -29,7 +30,7 @@ export class ProductSelectionComponent implements OnInit, OnDestroy {
       productId: [''],
       amount: ['']
     });
-    this.webSocketAPI = new WebSocketAPI(new ProductSelectionComponent(this.http, this.formBuilder, this._snackBar, this._matDialog))
+    this.webSocketAPI = new WebSocketAPI(new ProductSelectionComponent(this.http, this.formBuilder, this._snackBar, this._matDialog, this.router))
     this.connect();
   }
   ngOnDestroy() {
@@ -47,15 +48,15 @@ export class ProductSelectionComponent implements OnInit, OnDestroy {
     this.http.post('http://localhost:8080/warehouse/selectProduct', { productId, amount }, {observe: "response"}).subscribe(
         response => {
           console.log(response.body);
-          if(response.ok) {
-            this.openSnackBar("Request sent", "Okay");
-            this.productSelectionForm.reset();
+            if(response.ok) {
+              this.openSnackBar("Request sent", "Okay");
+              this.productSelectionForm.reset();
+            }
+          },
+          error => {
+            console.log('Error', error.message);
           }
-        },
-        error => {
-          console.log('Error', error.message);
-        }
-    );
+      );
   }
 
   private openSnackBar(message: string, action: string) {
@@ -73,13 +74,11 @@ export class ProductSelectionComponent implements OnInit, OnDestroy {
 
   private _openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000,
-      verticalPosition: "top",
+      duration: 3000
     });
   }
 
-  /*handleMessage(message: string) {
-    console.log("Message received: " + message)
-    this.openDialog(message);
-  }*/
+  returnHome() {
+    this.router.navigateByUrl('home');
+  }
 }

@@ -4,7 +4,7 @@ import * as Stomp from "stompjs";
 
 export class WebSocketAPI {
     webSocketEndPoint: string = 'http://localhost:8080/ws';
-    topic: string = "/topic/productSelection";
+    topic1: string = "/topic/productSelection";
     stompClient: any;
     _productSelectionComponent!: ProductSelectionComponent;
 
@@ -18,7 +18,7 @@ export class WebSocketAPI {
         this.stompClient = Stomp.over(ws);
         const _this = this;
         _this.stompClient.connect({}, function (frame: any) {
-            _this.stompClient.subscribe(_this.topic, function (sdkEvent: any) {
+            _this.stompClient.subscribe(_this.topic1, function (sdkEvent: any) {
                 _this.onMessageReceived(sdkEvent);
             });
         }, this.errorCallBack);

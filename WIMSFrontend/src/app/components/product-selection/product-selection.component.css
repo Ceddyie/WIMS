@@ -15,3 +15,12 @@
 .snackBar {
     background-color: blue;
 }
+
+.form-button {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin: 5%;
+}
