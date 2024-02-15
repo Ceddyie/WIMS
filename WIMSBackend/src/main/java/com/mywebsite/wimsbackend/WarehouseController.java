@@ -33,12 +33,7 @@ public class WarehouseController {
 
     @PostMapping("/assignStorage")
     public String assignStorage(@RequestBody StorageAssignmentRequest request) {
-        kafkaProducerService.sendStorageAssignmentEvent(request.getStorageLocation(), request.getProductId());
+        kafkaProducerService.sendStorageAssignmentEvent(request.getProductId(), request.getAmount());
         return "Storage assigned successfully";
     }
-
-    /*@GetMapping("/selectionMessage")
-    public ResponseEntity<String> getKafkaMessages() {
-        return new ResponseEntity<>(kafkaConsumerComponent.getKafkaSelectionMessage(), HttpStatus.CONTINUE);
-    }*/
 }

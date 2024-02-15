@@ -22,8 +22,8 @@ public class StorageAssignmentRequest {
 
     public StorageAssignmentRequest() {}
 
-    public StorageAssignmentRequest(String storageLocation, String productId) {
-        this.storageLocation = storageLocation;
+    public StorageAssignmentRequest(int amount, String productId) {
+        this.amount = amount;
         this.productId = productId;
     }
 
