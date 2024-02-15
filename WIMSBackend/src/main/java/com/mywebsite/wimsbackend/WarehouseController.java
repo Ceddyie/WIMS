@@ -1,17 +1,14 @@
 package com.mywebsite.wimsbackend;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.mywebsite.wimsbackend.KafkaConsumerComponent;
-import com.mywebsite.wimsbackend.KafkaProducerService;
 import com.mywebsite.wimsbackend.requests.ProductSelectionRequest;
 import com.mywebsite.wimsbackend.requests.StorageAssignmentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,7 +19,12 @@ public class WarehouseController {
     private KafkaProducerService kafkaProducerService;
 
     @Autowired
-    private KafkaConsumerComponent kafkaConsumerComponent;
+    private ProductService productService;
+
+    @GetMapping("/getProducts")
+    public List<ProductSelectionRequest> getAllProducts() {
+        return productService.getAllProducts();
+    }
 
     @PostMapping("/selectProduct")
     public ResponseEntity<Map<String, String>> selectProduct(@RequestBody ProductSelectionRequest request) {

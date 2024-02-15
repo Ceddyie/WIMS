@@ -1,5 +1,20 @@
+<div class="container">
+    <h1 style="text-decoration: underline">Select a product:</h1>
+    <div *ngIf="products.length > 0" style="text-align: center">
+        <button id="productBox" *ngFor="let product of products">
+            <img [src]="product.imageUrl" alt="{{ product.productName }}" width="50%" height="50%">
+            <p style="font-weight: bold">{{ product.productName }}</p>
+        </button>
+        <button id="customProduct">
+            <img [src]="otherImage" alt="Other product" width="73%" height="73%">
+            <p style="font-weight: bold">Other product</p>
+        </button>
+    </div>
+    <button style="margin: 5%;" class="btn btn-danger" (click)="returnHome()"><span style="padding: 1%" class="material-symbols-outlined">arrow_back</span>Return</button>
+</div>
+
+<!--<br>
 <div class="productPane">
-    <h1>Products:</h1>
     <form [formGroup]="productSelectionForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="productId">Product ID</label>
@@ -10,10 +25,9 @@
             <input type="number" class="form-control" id="amount" formControlName="amount" required>
         </div>
         <div class="form-button">
-            <button class="btn btn-danger" (click)="returnHome()">Cancel</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button style="margin: 5%;" type="submit" class="btn btn-primary">Submit</button>
         </div>
 
     </form>
-</div>
+</div>-->
 

@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import SockJS from "sockjs-client";
+import {CommonModule} from "@angular/common";
 
 
 export const appConfig: ApplicationConfig = {
@@ -17,6 +17,7 @@ export const appConfig: ApplicationConfig = {
       importProvidersFrom(BrowserAnimationsModule),
       importProvidersFrom(MatSnackBarModule),
       importProvidersFrom(MatDialogModule),
-      importProvidersFrom(MatButtonModule)
+      importProvidersFrom(MatButtonModule),
+      importProvidersFrom(CommonModule)
   ],
 };

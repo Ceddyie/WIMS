@@ -17,6 +17,9 @@ public class ProductSelectionRequest {
     private String productName;
 
     @Column
+    private String imageUrl;
+
+    @Column
     private int amount;
 
     public ProductSelectionRequest() {
