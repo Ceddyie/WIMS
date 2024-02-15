@@ -1,5 +1,6 @@
 package com.mywebsite.wimsbackend;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.mywebsite.wimsbackend.KafkaConsumerComponent;
 import com.mywebsite.wimsbackend.KafkaProducerService;
 import com.mywebsite.wimsbackend.requests.ProductSelectionRequest;
@@ -32,8 +33,11 @@ public class WarehouseController {
     }
 
     @PostMapping("/assignStorage")
-    public String assignStorage(@RequestBody StorageAssignmentRequest request) {
-        kafkaProducerService.sendStorageAssignmentEvent(request.getProductId(), request.getAmount());
-        return "Storage assigned successfully";
+    public ResponseEntity<StorageAssignmentRequest> assignStorage(@RequestBody StorageAssignmentRequest request) {
+        System.out.println("------");
+        System.out.println(request);
+        System.out.println("------");
+
+        return kafkaProducerService.sendStorageAssignmentEvent(request);
     }
 }

@@ -1,6 +1,9 @@
 package com.mywebsite.wimsbackend;
 
+import com.mywebsite.wimsbackend.requests.StorageAssignmentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +26,9 @@ public class KafkaProducerService {
         sentTimestamp = System.currentTimeMillis();
     }
 
-    public void sendStorageAssignmentEvent(String productId, int amount) {
-        String message = productId + ":" + amount;
+    public ResponseEntity<StorageAssignmentRequest> sendStorageAssignmentEvent(StorageAssignmentRequest request) {
+        String message = String.valueOf(request);
         kafkaTemplate.send(STORAGE_ASSIGNMENT_TOPIC, message);
+        return new ResponseEntity<StorageAssignmentRequest>(HttpStatus.OK);
     }
 }

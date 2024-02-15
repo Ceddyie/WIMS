@@ -7,17 +7,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Entity
-@Table(name = "storageAssignment")
 public class StorageAssignmentRequest {
-    @Id
-    @Column
-    private String storageLocation;
-
-    @Column
     private String productId;
 
-    @Column
     private int amount;
 
     public StorageAssignmentRequest() {}
