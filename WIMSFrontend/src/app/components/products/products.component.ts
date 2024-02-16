@@ -3,7 +3,8 @@ import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatT
 import {ProductService} from "../../services/product.service";
 import {CommonModule, NgIf} from "@angular/common";
 import * as console from "console";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import {Router, RouterLink} from "@angular/router";
+import {MatSort, MatSortHeader, Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-inventory',
@@ -16,15 +17,17 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
     MatHeaderCell,
     MatHeaderCellDef,
     MatCell,
-    MatCellDef
+    MatCellDef,
+    RouterLink
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit{
   products: any = [];
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
   }
+
   private getAllProducts() {
     this.productService.getAllProducts().subscribe((response) => {
           this.products = response;
@@ -39,7 +42,7 @@ export class ProductsComponent implements OnInit{
   }
 
   pickProduct(productId: any) {
-    
+    this.router.navigate(['selectProduct', productId])
   }
 
   storeProduct(productId: any) {
@@ -48,5 +51,9 @@ export class ProductsComponent implements OnInit{
 
   deleteProduct(productId: any) {
     
+  }
+
+  addProduct() {
+
   }
 }

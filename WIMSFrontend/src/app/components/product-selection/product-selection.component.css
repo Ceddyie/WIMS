@@ -12,6 +12,10 @@
     margin-bottom: -2rem;
 }
 
+.form-group {
+    width: 100%;
+}
+
 .snackBar {
     background-color: blue;
 }

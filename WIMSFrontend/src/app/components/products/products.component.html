@@ -1,24 +1,38 @@
-<h1 class="title">Our products:</h1>
 
-<table class="styledTable">
-    <thead>
+
+<div class="productDiv">
+    <h1 class="title">Our products:</h1>
+
+    <table class="styledTable">
+        <thead>
         <tr>
             <th>ProductID</th>
             <th>Product Name</th>
             <th>Image</th>
             <th>Interaction</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <tr *ngFor="let product of products">
             <td>{{ product.productId }}</td>
             <td>{{ product.productName }}</td>
             <td><img src="{{ product.imageUrl }}" width="75px" height="75px"></td>
             <td>
                 <button (click)="pickProduct(product.productId)" class="btn btn-info" id="pickButton">Pick</button>
-                <button (click)="storeProduct(product.productId)" class="btn btn-primary" style="margin-left: 1%">Store</button>
-                <button (click)="deleteProduct(product.productId)" class="btn btn-danger" style="margin-left: 1%">Delete</button>
+                <button (click)="storeProduct(product.productId)" class="btn btn-primary" style="margin-left: 1%" disabled>Store</button>
+                <button (click)="deleteProduct(product.productId)" class="btn btn-danger" style="margin-left: 1%" disabled>Delete</button>
             </td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+<div style="text-align: center">
+    <button class="btn btn-success" (click)="addProduct()">
+        <span style="padding: 1%" class="material-symbols-outlined">add</span>
+    </button>
+    <button style="margin-left: 1%" class="btn btn-danger" routerLink="">
+        <span style="padding: 1%" class="material-symbols-outlined">cancel</span>
+    </button>
+</div>
+
+

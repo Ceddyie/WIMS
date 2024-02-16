@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: '', pathMatch: "full", redirectTo: "/home" },
   { path: 'home', component: HomeComponent },
   { path: 'selectProduct', component: ProductSelectionComponent },
+  { path: 'selectProduct/:id', component: ProductSelectionComponent },
   { path: 'assignStorage', component: StorageAssignmentComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'orders', component: OrdersComponent }
