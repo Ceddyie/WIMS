@@ -1,5 +1,5 @@
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
-import {Product} from "./entities/Product";
+import {Product} from "../entities/Product";
 
 export type SortColumn = keyof Product |'';
 export type SortDirection = 'asc' | 'desc' | '';

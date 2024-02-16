@@ -6,8 +6,8 @@ import * as console from "console";
 import {Router, RouterLink} from "@angular/router";
 import {Product} from "../../entities/Product";
 import {FormsModule} from "@angular/forms";
-import {ProductPipe} from "../../product.pipe";
-import {compare, SortableHeaderDirective, SortEvent} from "../../sortable-header.directive";
+import {ProductPipe} from "../../utils/product.pipe";
+import {compare, SortableHeaderDirective, SortEvent} from "../../utils/sortable-header.directive";
 import {of} from "rxjs";
 
 @Component({
@@ -89,6 +89,4 @@ export class ProductsComponent implements OnInit{
       });
     }
   }
-
-  protected readonly of = of;
 }

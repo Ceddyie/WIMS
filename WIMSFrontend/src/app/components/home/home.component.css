@@ -8,7 +8,7 @@
 .sqr {
 width: 150px;
 height: 150px;
-background-color: #fbf315;
+background-color: rgb(255, 238, 0);
 border-radius: 5px;
 border: none;
 pointer-events: none;

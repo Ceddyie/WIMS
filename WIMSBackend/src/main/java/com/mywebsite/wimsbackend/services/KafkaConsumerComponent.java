@@ -1,6 +1,5 @@
-package com.mywebsite.wimsbackend;
+package com.mywebsite.wimsbackend.services;
 
-import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
