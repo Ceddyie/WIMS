@@ -3,17 +3,20 @@
 <div class="productDiv">
     <h1 class="title">Our products:</h1>
 
+    <div class="form-group">
+        <input type="search" class="form-control" [(ngModel)]="filter" placeholder="Filter by ProductID or Product Name">
+    </div>
     <table class="styledTable">
         <thead>
         <tr>
-            <th>ProductID</th>
-            <th>Product Name</th>
+            <th sortable="productId">ProductID</th>
+            <th sortable="productName">Product Name</th>
             <th>Image</th>
             <th>Interaction</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of products | product:filter">
             <td>{{ product.productId }}</td>
             <td>{{ product.productName }}</td>
             <td><img src="{{ product.imageUrl }}" width="75px" height="75px"></td>

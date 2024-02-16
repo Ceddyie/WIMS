@@ -8,6 +8,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
+import {ProductPipe} from "./product.pipe";
+import {SortableHeaderDirective} from "./sortable-header.directive";
 
 
 export const appConfig: ApplicationConfig = {
@@ -18,6 +20,8 @@ export const appConfig: ApplicationConfig = {
       importProvidersFrom(MatSnackBarModule),
       importProvidersFrom(MatDialogModule),
       importProvidersFrom(MatButtonModule),
-      importProvidersFrom(CommonModule)
+      importProvidersFrom(CommonModule),
+      importProvidersFrom(ProductPipe),
+      importProvidersFrom(SortableHeaderDirective)
   ],
 };
