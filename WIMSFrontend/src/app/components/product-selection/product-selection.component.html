@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
     <h1 style="text-decoration: underline">Select a product:</h1>
     <div *ngIf="products.length > 0" style="text-align: center">
         <button id="productBox" *ngFor="let product of products">
@@ -10,10 +10,10 @@
             <p style="font-weight: bold">Other product</p>
         </button>
     </div>
-    <button style="margin: 5%;" class="btn btn-danger" (click)="returnHome()"><span style="padding: 1%" class="material-symbols-outlined">arrow_back</span>Return</button>
-</div>
+    <button style="margin: 5%;" class="btn btn-danger" routerLink=""><span style="padding: 1%" class="material-symbols-outlined">arrow_back</span>Return</button>
+</div>-->
 
-<!--<br>
+<br>
 <div class="productPane">
     <form [formGroup]="productSelectionForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -29,5 +29,5 @@
         </div>
 
     </form>
-</div>-->
+</div>
 

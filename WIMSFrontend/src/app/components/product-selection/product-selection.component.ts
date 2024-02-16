@@ -21,7 +21,8 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
     CommonModule,
     MatButton,
     MatGridList,
-    MatGridTile
+    MatGridTile,
+    RouterLink
   ],
   templateUrl: './product-selection.component.html',
   styleUrl: './product-selection.component.css'
@@ -89,10 +90,6 @@ export class ProductSelectionComponent implements OnInit, OnDestroy {
     this._snackBar.open(message, action, {
       duration: 3000
     });
-  }
-
-  returnHome() {
-    this.router.navigateByUrl('home');
   }
 
   private getAllProducts() {

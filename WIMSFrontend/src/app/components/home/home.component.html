@@ -1,15 +1,37 @@
-<div class="home-btns">
-    <h2>Herzlich Willkommen!</h2>
+    <div class="home-btns">
+        <button class="sqr" style="margin: 1em">
+            <span class="material-symbols-outlined">home</span>
+            <br>
+            Menü
+        </button>
 
-    <button class="pbutton"  routerLink="/selectProduct">
-        <span class="material-symbols-outlined">shopping_cart</span>
-        <br>
-        Select Products
-    </button>
+        <button class="pbutton" routerLink="/products">
+            <span class="material-symbols-outlined">inventory</span>
+            <br>
+            Products
+        </button>
 
-    <button class="pbutton" routerLink="/assignStorage">
-        <span class="material-symbols-outlined">local_shipping</span>
-        <br>
-        Assign Storage
-    </button>
-</div>
+        <button class="pbutton" routerLink="/orders">
+            <span class="material-symbols-outlined">shopping_basket</span>
+            <br>
+            Orders
+        </button>
+
+        <button class="pbutton"  routerLink="/selectProduct">
+            <span class="material-symbols-outlined">local_shipping</span>
+            <br>
+            Pick Product
+        </button>
+
+        <button class="pbutton" routerLink="/assignStorage">
+            <span class="material-symbols-outlined">barcode</span>
+            <br>
+            Store Product
+        </button>
+
+        <button class="pbutton" (click)="settingsDialog()">
+            <span class="material-symbols-outlined">settings</span>
+            <br>
+            Settings
+        </button>
+    </div>

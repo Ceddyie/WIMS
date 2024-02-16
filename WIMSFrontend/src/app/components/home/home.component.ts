@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {SettingsComponent} from "../settings/settings.component";
 
 @Component({
   selector: 'app-home',
@@ -11,5 +13,16 @@ import {RouterLink} from "@angular/router";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  constructor(private matDialog: MatDialog) {
+  }
 
+  settingsDialog() {
+    this.openMatDialog();
+  }
+
+  private openMatDialog() {
+    const dialogRef = this.matDialog.open(SettingsComponent);
+  }
+
+  protected readonly statusbar = statusbar;
 }

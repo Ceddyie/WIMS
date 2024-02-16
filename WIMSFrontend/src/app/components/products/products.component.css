@@ -1,0 +1,54 @@
+h1 {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width: 1080px) {
+    h1 {
+        font-size: 20px;
+        margin-top: 50px;
+    }
+}
+
+.styledTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styledTable thead tr {
+    background-color: #5d5d5d;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styledTable th,
+.styledTable td {
+    padding: 12px 15px;
+}
+
+.styledTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styledTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styledTable tbody tr:last-of-type {
+    border-bottom: 2px solid #5d5d5d;
+}
+
+.styledTable tbody  :hover {
+    background-color: #f3f3f3;
+}
+
+/*
+#pickButton {
+    background-color: rgb(251,243,21);
+    border-color: rgb(251,243,21);
+    color: #5d5d5d;
+}*/
