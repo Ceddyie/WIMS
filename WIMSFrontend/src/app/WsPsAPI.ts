@@ -42,7 +42,15 @@ export class WsPsAPI {
     onMessageReceived(message: any) {
         message = JSON.stringify(message.body);
         console.log("Received message: " + message)
-        if (!message.includes("Error")) {
+        if (message.includes("Error")) {
+            message.replace(/\\/g, '');
+            this._productSelectionComponent.openDialog(message);
+        }
+        else if (message.includes("Warning")) {
+            message.replace(/\\"/g, '' && /"/g, '');
+            this._productSelectionComponent.openDialog(message);
+        }
+        else {
             const split = message.split(':');
             const product = split[0].replace(/\\"/g, '',);
             const productId = product.replace(/"/g, '');
@@ -53,11 +61,7 @@ export class WsPsAPI {
             const storageLocation = storage.replace(/"/g, '');
             console.log('Stored in: ' + storageLocation);
 
-            const newMessage = "ProductID: " + productId + " | Amount: " + amount + " | Stored in: " +storageLocation;
-            this._productSelectionComponent.openDialog(newMessage);
-        }
-        else {
-            const newMessage = "Error! Please check the information you entered.";
+            const newMessage = "Product with ID: " + productId + " is stored in: " +storageLocation + ". New amount: " + amount;
             this._productSelectionComponent.openDialog(newMessage);
         }
     }
