@@ -6,34 +6,35 @@
 }
 
 .sqr {
-width: 150px;
-height: 150px;
-background-color: rgb(255, 238, 0);
-border-radius: 5px;
-border: none;
-pointer-events: none;
-font-size: 1.1em;
+    width: 150px;
+    height: 150px;
+    background-color: rgb(255, 238, 0);
+    border-radius: 5px;
+    border: none;
+    pointer-events: none;
+    font-size: 1.1em;
+    color: #5b666e;
 }
 
 .pbutton {
-margin: 1em;
-background-color: #8d9aa4;
-border: none;
-width: 150px;
-height: 150px;
-transition: 0.1s;
-display: inline;
-color: #f3f3f3;
-font-size: 1.1em;
-border-radius: 10px;
+    margin: 1em;
+    background-color: #8d9aa4;
+    border: none;
+    width: 150px;
+    height: 150px;
+    transition: 0.1s;
+    display: inline;
+    color: #f3f3f3;
+    font-size: 1.1em;
+    border-radius: 10px;
 }
 
 .pbutton:hover {
-background-color: #65747f;
-transition: 0.2s;
-transform: scale(1.1);
+    background-color: #65747f;
+    transition: 0.2s;
+    transform: scale(1.1);
 }
 
 .material-symbols-outlined {
-font-size: 5em;
+    font-size: 5em;
 }
