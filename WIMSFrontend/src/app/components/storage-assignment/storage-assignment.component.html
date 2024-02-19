@@ -1,1 +1,23 @@
+<br>
+<h2>Assign Storage to a Product:</h2>
+<div class="productPane">
+    <form [formGroup]="storageAssignmentForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form-group">
+            <mat-label>Product ID</mat-label>
+            <input [ngModel]="selectedProductId" matInput type="text" formControlName="productId" required>
+        </mat-form-field>
+        <mat-form-field class="form-group">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" id="amount" formControlName="amount" required [(ngModel)]="amount">
+        </mat-form-field>
+        <div class="form-button">
+            <button style="margin: 5%;" type="submit" class="btn btn-success" [disabled]="productId == '' || amount == null">
+                <span style="padding: 1%" class="material-symbols-outlined">check</span>
+            </button>
+            <button style="margin: 5%;" class="btn btn-danger" routerLink="">
+                <span style="padding: 1%" class="material-symbols-outlined">cancel</span>
+            </button>
+        </div>
 
+    </form>
+</div>

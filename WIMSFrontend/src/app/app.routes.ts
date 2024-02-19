@@ -12,6 +12,7 @@ export const routes: Routes = [
   { path: 'selectProduct', component: ProductSelectionComponent },
   { path: 'selectProduct/:id', component: ProductSelectionComponent },
   { path: 'assignStorage', component: StorageAssignmentComponent },
+  { path: 'assignStorage/:id', component: StorageAssignmentComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'orders', component: OrdersComponent }
 ];

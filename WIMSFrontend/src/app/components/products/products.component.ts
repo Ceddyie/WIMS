@@ -61,7 +61,7 @@ export class ProductsComponent implements OnInit{
   }
 
   storeProduct(productId: any) {
-    
+    this.router.navigate(['assignStorage', productId])
   }
 
   deleteProduct(productId: any) {

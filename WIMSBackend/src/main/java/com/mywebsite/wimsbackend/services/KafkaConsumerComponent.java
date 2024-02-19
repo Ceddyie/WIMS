@@ -30,4 +30,10 @@ public class KafkaConsumerComponent {
 
         this.messagingTemplate.convertAndSend("/topic/productSelection", message);
     }
+
+    @KafkaListener(topics = "storage_assignment_2")
+    public void receive(String message) {
+        System.out.println(message);
+        this.messagingTemplate.convertAndSend("/topic/storageAssignment", message);
+    }
 }

@@ -1,0 +1,61 @@
+.productPane {
+    width: 20%; /* leaves some space to the horizontal browser borders */
+    overflow: hidden;
+    padding: 2rem 0.5rem;
+    flex: 1 0 auto;
+    display: block;
+    margin: 0 auto;
+    min-height: 100%;
+
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+    margin-bottom: -2rem;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.snackBar {
+    background-color: blue;
+}
+
+.form-button {
+    display: flex;
+    justify-content: center;
+}
+
+/*button {
+    margin: 5%;
+}*/
+
+#productBox {
+    padding: 5px 10px;
+    margin: 5px;
+    width: calc(25% - 100px);
+    background-color: white;
+    border-color: #a1a6ab;
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#customProduct {
+    padding: 5px 10px;
+    margin: 5px;
+    width: calc(25% - 100px);
+    background-color: white;
+    border-color: #a1a6ab;
+    border-radius: 10px;
+}
+
+h2 {
+    color: #5d5d5d;
+    font-size: 2.5em;
+    text-decoration: underline;
+    text-align: center;
+}

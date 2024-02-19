@@ -52,3 +52,10 @@
     border-color: #a1a6ab;
     border-radius: 10px;
 }
+
+h2 {
+    color: #5d5d5d;
+    font-size: 2.5em;
+    text-decoration: underline;
+    text-align: center;
+}

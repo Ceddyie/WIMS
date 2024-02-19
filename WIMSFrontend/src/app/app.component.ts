@@ -14,20 +14,16 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'WIMSFrontend';
+  title = 'Warehouse Management';
 
   time = '';
 
-  /** Destroy Ref */
   destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.setupTimeRefresh();
   }
 
-  /**
-   * Setup the refreshing of the time to occur at each minute
-   */
   private setupTimeRefresh() {
     this.setCurrentTime();
     const aMinute = Duration.fromDurationLike({ minutes: 1 });
@@ -40,9 +36,6 @@ export class AppComponent {
         });
   }
 
-  /**
-   * Set the current time
-   */
   private setCurrentTime() {
     this.time = DateTime.now().toFormat('EEEE, dd MMMM yyyy HH:mm');
   }

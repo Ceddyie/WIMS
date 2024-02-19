@@ -2,7 +2,7 @@ import {ProductSelectionComponent} from "./components/product-selection/product-
 import SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
 
-export class WebSocketAPI {
+export class WsPsAPI {
     webSocketEndPoint: string = 'http://localhost:8080/ws';
     topic1: string = "/topic/productSelection";
     stompClient: any;
