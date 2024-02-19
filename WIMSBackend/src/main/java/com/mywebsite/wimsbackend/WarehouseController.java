@@ -7,6 +7,7 @@ import com.mywebsite.wimsbackend.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -23,6 +24,9 @@ public class WarehouseController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private KafkaTemplate<String, StorageAssignmentRequest> kafkaTemplate;
+
     @GetMapping("/getProducts")
     public List<ProductSelectionRequest> getAllProducts() {
         return productService.getAllProducts();
@@ -37,12 +41,17 @@ public class WarehouseController {
     }
 
     @PostMapping("/assignStorage")
-    public ResponseEntity<StorageAssignmentRequest> assignStorage(@RequestBody StorageAssignmentRequest request) {
+    public ResponseEntity<Map<String, String>> assignStorage(@RequestBody StorageAssignmentRequest request) {
         System.out.println("------");
         System.out.println(request);
         System.out.println("------");
 
-        return kafkaProducerService.sendStorageAssignmentEvent(request);
+        kafkaProducerService.sendStorageAssignmentEvent(request);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Assignment request sent successfully");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/addProduct")

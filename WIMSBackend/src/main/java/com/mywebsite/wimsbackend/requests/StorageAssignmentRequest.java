@@ -14,9 +14,9 @@ public class StorageAssignmentRequest {
 
     public StorageAssignmentRequest() {}
 
-    public StorageAssignmentRequest(int amount, String productId) {
-        this.amount = amount;
+    public StorageAssignmentRequest(String productId, int amount) {
         this.productId = productId;
+        this.amount = amount;
     }
 
 }

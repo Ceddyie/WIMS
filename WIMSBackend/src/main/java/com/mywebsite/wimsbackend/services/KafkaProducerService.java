@@ -14,9 +14,13 @@ public class KafkaProducerService {
     private static final String TEST_TOPIC = "test_topic";
     long sentTestTimestamp;
     long sentTimestamp;
+    long assignmentTimestamp;
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
+
+    @Autowired
+    private KafkaTemplate<String, StorageAssignmentRequest> objectKafkaTemplate;
 
     public void sendProductSelectionEvent(String productId, int amount) {
         String message = productId + ":" + amount;
@@ -26,9 +30,8 @@ public class KafkaProducerService {
         sentTimestamp = System.currentTimeMillis();
     }
 
-    public ResponseEntity<StorageAssignmentRequest> sendStorageAssignmentEvent(StorageAssignmentRequest request) {
-        String message = String.valueOf(request);
-        kafkaTemplate.send(STORAGE_ASSIGNMENT_TOPIC, message);
-        return new ResponseEntity<StorageAssignmentRequest>(HttpStatus.OK);
+    public void sendStorageAssignmentEvent(StorageAssignmentRequest request) {
+        objectKafkaTemplate.send(STORAGE_ASSIGNMENT_TOPIC, new StorageAssignmentRequest(request.getProductId(), request.getAmount()));
+        assignmentTimestamp = System.currentTimeMillis();
     }
 }
