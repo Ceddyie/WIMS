@@ -59,11 +59,26 @@ public class WarehouseController {
         System.out.println("------");
         System.out.println(request);
         System.out.println("------");
+
         ResponseEntity<ProductSelectionRequest> productAdded = productService.addProduct(request);
 
         System.out.println("------");
         System.out.println(productAdded.getBody());
         System.out.println("------");
         return productAdded;
+    }
+
+    @DeleteMapping("/deleteProduct/{id}")
+    public ResponseEntity<ProductSelectionRequest> deleteProduct(@PathVariable String id) {
+        System.out.println("------");
+        System.out.println("DELETE REQUEST FOR: " + id);
+        System.out.println("------");
+
+        ResponseEntity<ProductSelectionRequest> productDeleted = productService.deleteProduct(id);
+
+        System.out.println("------");
+        System.out.println(productDeleted.getBody());
+        System.out.println("------");
+        return productDeleted;
     }
 }

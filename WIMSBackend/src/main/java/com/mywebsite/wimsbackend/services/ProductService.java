@@ -59,4 +59,23 @@ public class ProductService {
             return false;
         }
     }
+
+    public ResponseEntity<ProductSelectionRequest> deleteProduct(String id) {
+        System.out.println("Product delete request processing...");
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("productId", id);
+
+        List<ProductSelectionRequest> list = jdbcTemplate.query("SELECT * FROM product WHERE product_id = :productId", namedParameters, new BeanPropertyRowMapper<>(ProductSelectionRequest.class));
+
+        if (!list.isEmpty()) {
+            jdbcTemplate.update("DELETE FROM product WHERE product_id = :productId", namedParameters);
+            System.out.println("Product deleted successfully");
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else {
+            System.out.println("Product with id " + id + " not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

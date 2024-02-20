@@ -23,14 +23,14 @@
             <td>
                 <button (click)="pickProduct(product.productId)" class="btn btn-info" id="pickButton">Pick</button>
                 <button (click)="storeProduct(product.productId)" class="btn btn-primary" style="margin-left: 2%">Store</button>
-                <button (click)="deleteProduct(product.productId)" class="btn btn-danger" style="margin-left: 2%" disabled>Delete</button>
+                <button (click)="deleteProduct(product.productId)" class="btn btn-danger" style="margin-left: 2%">Delete</button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 <div style="text-align: center">
-    <button class="btn btn-success" (click)="addProduct()" disabled>
+    <button class="btn btn-success" (click)="addProduct()">
         <span style="padding: 1%" class="material-symbols-outlined">add</span>
     </button>
     <button style="margin-left: 1%" class="btn btn-danger" routerLink="">

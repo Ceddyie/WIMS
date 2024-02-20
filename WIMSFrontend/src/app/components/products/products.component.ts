@@ -9,6 +9,9 @@ import {FormsModule} from "@angular/forms";
 import {ProductPipe} from "../../utils/product.pipe";
 import {compare, SortableHeaderDirective, SortEvent} from "../../utils/sortable-header.directive";
 import {of} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {SettingsComponent} from "../settings/settings.component";
+import {AddProductComponent} from "../add-product/add-product.component";
 
 @Component({
   selector: 'app-inventory',
@@ -39,7 +42,7 @@ export class ProductsComponent implements OnInit{
   @ViewChildren(SortableHeaderDirective)
   headers!: QueryList<SortableHeaderDirective>;
 
-  constructor(private productService: ProductService, private router: Router) {
+  constructor(private productService: ProductService, private router: Router, private matDialog: MatDialog) {
   }
 
   private getAllProducts() {
@@ -65,11 +68,14 @@ export class ProductsComponent implements OnInit{
   }
 
   deleteProduct(productId: any) {
-    
+    this.productService.deleteProduct(productId).subscribe(data => {
+      console.log(data);
+    });
+    location.reload();
   }
 
   addProduct() {
-
+    this.openDialog();
   }
 
   onSort({ column, direction }: SortEvent) {
@@ -88,5 +94,9 @@ export class ProductsComponent implements OnInit{
         return direction === 'asc' ? res : -res;
       });
     }
+  }
+
+  openDialog() {
+    const dialogRef = this.matDialog.open(AddProductComponent);
   }
 }
