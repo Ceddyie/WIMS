@@ -1,4 +1,4 @@
-package com.mywebsite.wimsbackend.requests;
+package com.mywebsite.wimsbackend.entities;
 
 import lombok.Data;
 

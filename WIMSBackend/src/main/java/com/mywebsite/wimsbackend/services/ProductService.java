@@ -1,20 +1,16 @@
 package com.mywebsite.wimsbackend.services;
 
-import com.mywebsite.wimsbackend.requests.ProductSelectionRequest;
+import com.mywebsite.wimsbackend.entities.ProductSelectionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @CrossOrigin
