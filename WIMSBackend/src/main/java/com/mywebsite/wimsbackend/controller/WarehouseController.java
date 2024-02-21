@@ -1,8 +1,10 @@
 package com.mywebsite.wimsbackend.controller;
 
+import com.mywebsite.wimsbackend.entities.Orders;
 import com.mywebsite.wimsbackend.entities.ProductSelectionRequest;
 import com.mywebsite.wimsbackend.entities.StorageAssignmentRequest;
 import com.mywebsite.wimsbackend.services.KafkaProducerService;
+import com.mywebsite.wimsbackend.services.OrderService;
 import com.mywebsite.wimsbackend.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,9 @@ public class WarehouseController {
 
     @Autowired
     private KafkaTemplate<String, StorageAssignmentRequest> kafkaTemplate;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/getProducts")
     public List<ProductSelectionRequest> getAllProducts() {
@@ -80,5 +85,21 @@ public class WarehouseController {
         System.out.println(productDeleted.getBody());
         System.out.println("------");
         return productDeleted;
+    }
+
+    public void saveOrder(Orders orders) {
+        System.out.println("Inserting into database");
+        orderService.saveOrder(orders);
+    }
+
+    @GetMapping("/getOrders")
+    public List<Orders> getOrders() {
+        return orderService.getOrders();
+    }
+
+    @PutMapping("/setShipped/{orderId}")
+    public ResponseEntity<Orders> setShipped (@PathVariable long orderId) {
+
+        return orderService.setShipped(orderId);
     }
 }

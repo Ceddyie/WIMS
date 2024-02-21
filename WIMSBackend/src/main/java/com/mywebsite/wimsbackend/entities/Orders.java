@@ -2,6 +2,7 @@ package com.mywebsite.wimsbackend.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.query.Order;
 
 @Entity
 @Data
@@ -21,8 +22,32 @@ public class Orders {
     private String productId;
 
     @Column
-    private String address;
+    private int amount;
+
+    @Column
+    private double totalCost;
 
     @Column
     private boolean shipped;
+
+    public Orders(){}
+
+    public Orders(Long id, Long orderDate, Long customerId, String productId, int amount, double totalCost, boolean shipped) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.customerId = customerId;
+        this.productId = productId;
+        this.amount = amount;
+        this.totalCost = totalCost;
+        this.shipped = shipped;
+    }
+
+    public Orders(Long orderDate, Long customerId, String productId, int amount, double totalCost, boolean shipped) {
+        this.orderDate = orderDate;
+        this.customerId = customerId;
+        this.productId = productId;
+        this.amount = amount;
+        this.totalCost = totalCost;
+        this.shipped = shipped;
+    }
 }

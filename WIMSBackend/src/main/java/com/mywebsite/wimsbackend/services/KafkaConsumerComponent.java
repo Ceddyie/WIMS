@@ -1,10 +1,15 @@
 package com.mywebsite.wimsbackend.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mywebsite.wimsbackend.controller.WarehouseController;
+import com.mywebsite.wimsbackend.entities.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.io.IOException;
 
 @Component
 @CrossOrigin(origins = "http://localhost:4200")
@@ -14,6 +19,9 @@ public class KafkaConsumerComponent {
 
     @Autowired
     private KafkaProducerService producer;
+
+    @Autowired
+    private WarehouseController warehouseController;
 
     @KafkaListener(topics = "test_topic")
     public void listenTest(String message) {
@@ -35,5 +43,13 @@ public class KafkaConsumerComponent {
     public void receive(String message) {
         System.out.println(message);
         this.messagingTemplate.convertAndSend("/topic/storageAssignment", message);
+    }
+
+    @KafkaListener(topics = "order_topic")
+    public void receiveOrder(String orderString) throws IOException {
+        System.out.println(String.format("##########\nConsumed Order-> %s\n##########", orderString));
+        ObjectMapper mapper = new ObjectMapper();
+        Orders orders = mapper.readValue(orderString, Orders.class);
+        warehouseController.saveOrder(orders);
     }
 }
