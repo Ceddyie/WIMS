@@ -18,6 +18,9 @@ public class ProductSelectionRequest {
     private String imageUrl;
 
     @Column
+    private double price;
+
+    @Column
     private int amount;
 
     public ProductSelectionRequest() {
