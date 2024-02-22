@@ -27,7 +27,7 @@ public class WarehouseController {
     private ProductService productService;
 
     @Autowired
-    private KafkaTemplate<String, StorageAssignmentRequest> kafkaTemplate;
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Autowired
     private OrderService orderService;

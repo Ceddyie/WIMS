@@ -50,6 +50,8 @@ public class KafkaConsumerComponent {
         System.out.println(String.format("##########\nConsumed Order-> %s\n##########", orderString));
         ObjectMapper mapper = new ObjectMapper();
         Orders orders = mapper.readValue(orderString, Orders.class);
+        long measureTime = System.currentTimeMillis() - orders.getTimestamp();
+        System.out.println("Measure time: " + measureTime);
         warehouseController.saveOrder(orders);
     }
 }

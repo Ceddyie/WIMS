@@ -3,8 +3,10 @@ package com.mywebsite.wimsbackend.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mywebsite.wimsbackend.entities.Orders;
+import com.mywebsite.wimsbackend.entities.ShippedMessage;
 import com.mywebsite.wimsbackend.entities.StorageAssignmentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class KafkaProducerService {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
-    private KafkaTemplate<String, StorageAssignmentRequest> objectKafkaTemplate;
+    private KafkaTemplate<String, Object> objectKafkaTemplate;
 
     @Autowired
     private KafkaTemplate<String, Long> longKafkaTemplate;
@@ -42,6 +44,7 @@ public class KafkaProducerService {
 
     public void sendSetShipped(long orderId) {
         System.out.println(String.format("##########\nProduced Order Id-> %s\n##########", orderId));
-        this.longKafkaTemplate.send(SHIPPED_TOPIC, orderId);
+        ShippedMessage message = new ShippedMessage(orderId, System.currentTimeMillis());
+        this.objectKafkaTemplate.send(SHIPPED_TOPIC, new ShippedMessage(orderId, System.currentTimeMillis()));
     }
 }

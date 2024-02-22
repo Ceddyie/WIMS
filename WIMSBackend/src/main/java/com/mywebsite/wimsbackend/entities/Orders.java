@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.query.Order;
 
-@Entity
+
 @Data
 @Table
 public class Orders {
@@ -29,6 +29,8 @@ public class Orders {
 
     @Column
     private boolean shipped;
+
+    private long timestamp;
 
     public Orders(){}
 
