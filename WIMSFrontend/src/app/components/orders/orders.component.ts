@@ -3,7 +3,6 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {ProductPipe} from "../../utils/product.pipe";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SortableHeaderDirective} from "../../utils/sortable-header.directive";
-import console from "console";
 import {ProductService} from "../../services/product.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatCheckbox} from "@angular/material/checkbox";
@@ -56,13 +55,14 @@ export class OrdersComponent implements OnInit{
 
   shipOrder(orderId: any) {
     this.productService.shipOrder(orderId).subscribe((response) => {
-      console.log(response.body);
-      if (response.status === 200) {
+      /*if (response && response.status === 200) {
         this.openSnackBar("Order shipped", "Okay");
-        window.location.reload();
-      }
+        location.reload();
+      }*/
+      location.reload();
     }, (error) => {
-      this.openSnackBar("Error occurred", "Okay");
+      /*this.openSnackBar("Error occurred", "Okay");*/
+      location.reload();
     })
   }
 
