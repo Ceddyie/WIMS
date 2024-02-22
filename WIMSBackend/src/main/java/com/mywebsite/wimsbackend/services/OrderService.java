@@ -17,6 +17,9 @@ public class OrderService {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private KafkaProducerService producerService;
+
     public void saveOrder(Orders orders) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("order_date", orders.getOrderDate());
@@ -37,6 +40,7 @@ public class OrderService {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("order_id", orderId);
 
+        producerService.sendSetShipped(orderId);
         jdbcTemplate.update("UPDATE orders SET shipped = true WHERE id = :order_id", namedParameters);
         return new ResponseEntity<Orders>(HttpStatus.OK);
     }

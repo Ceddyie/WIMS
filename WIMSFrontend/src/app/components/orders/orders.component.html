@@ -1,1 +1,39 @@
-<p>orders works!</p>
+<div class="productDiv">
+    <h1 class="title">Orders:</h1>
+    <div style="justify-content: center; text-align: center">
+        <mat-slide-toggle [(ngModel)]="hideShipped">
+            <br>
+            <p *ngIf="hideShipped">Show shipped Orders</p>
+            <p *ngIf="!hideShipped">Hide shipped Orders</p>
+        </mat-slide-toggle>
+    </div>
+
+
+    <table class="styledTable">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer ID</th>
+            <th>Product ID</th>
+            <th>amount</th>
+            <th>Actions</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of orders">
+            <td *ngIf="!hideShipped || !order.shipped">{{ order.id }}</td>
+            <td *ngIf="!hideShipped || !order.shipped">{{ order.customerId }}</td>
+            <td *ngIf="!hideShipped || !order.shipped">{{ order.productId }}</td>
+            <td *ngIf="!hideShipped || !order.shipped">{{ order.amount }}</td>
+            <td *ngIf="!hideShipped || !order.shipped">
+                <button (click)="pickProduct(order.productId)" *ngIf="!order.shipped" class="btn btn-info" id="pickButton">Pick</button>
+                <button (click)="shipOrder(order.id)" *ngIf="!order.shipped" class="btn btn-info" style="margin-left: 1%" id="shipButton">Ship</button>
+            </td>
+            <td *ngIf="!hideShipped || !order.shipped">
+                <mat-checkbox [(ngModel)]="order.shipped" (change)="toggleCheck()" disabled></mat-checkbox>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

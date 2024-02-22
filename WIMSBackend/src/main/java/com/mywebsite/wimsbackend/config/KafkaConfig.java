@@ -46,4 +46,18 @@ public class KafkaConfig {
     public KafkaTemplate<String, StorageAssignmentRequest> objectKafkaTemplate() {
         return new KafkaTemplate<>(objectProducerFactory());
     }
+
+    @Bean
+    public ProducerFactory<String, Long> longProducerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(config);
+    }
+
+    @Bean
+    public KafkaTemplate<String, Long> longKafkaTemplate() {
+        return new KafkaTemplate<>(longProducerFactory());
+    }
 }

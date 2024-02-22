@@ -22,4 +22,12 @@ export class ProductService {
   addProduct(product: Product) {
     return this.http.post('${this.basUrl}/addProduct', product);
   }
+
+  getAllOrders(): Observable<any> {
+    return this.http.get(`${this.basUrl}/getOrders`);
+  }
+
+  shipOrder(orderId: number): Observable<any> {
+    return this.http.put(`${this.basUrl}/setShipped/${orderId}`, orderId)
+  }
 }
