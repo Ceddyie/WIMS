@@ -1,13 +1,13 @@
 package com.mywebsite.wimsbackend.entities;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Table(name = "product")
-public class ProductSelectionRequest {
-
+@Table
+public class Product {
     @Column
     private String productId;
 
@@ -23,12 +23,7 @@ public class ProductSelectionRequest {
     @Column
     private int amount;
 
-    public ProductSelectionRequest() {
+    public Product() {
 
-    }
-
-    public ProductSelectionRequest(String productId, int amount) {
-        this.productId = productId;
-        this.amount = amount;
     }
 }

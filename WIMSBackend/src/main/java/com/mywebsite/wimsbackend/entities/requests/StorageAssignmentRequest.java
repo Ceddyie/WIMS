@@ -1,4 +1,4 @@
-package com.mywebsite.wimsbackend.entities;
+package com.mywebsite.wimsbackend.entities.requests;
 
 import lombok.Data;
 
@@ -8,11 +8,14 @@ public class StorageAssignmentRequest {
 
     private int amount;
 
+    private long timestamp;
+
     public StorageAssignmentRequest() {}
 
-    public StorageAssignmentRequest(String productId, int amount) {
+    public StorageAssignmentRequest(String productId, int amount, long timestamp) {
         this.productId = productId;
         this.amount = amount;
+        this.timestamp = timestamp;
     }
 
 }

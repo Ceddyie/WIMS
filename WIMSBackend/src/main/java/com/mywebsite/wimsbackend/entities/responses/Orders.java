@@ -1,4 +1,4 @@
-package com.mywebsite.wimsbackend.entities;
+package com.mywebsite.wimsbackend.entities.responses;
 
 import jakarta.persistence.*;
 import lombok.Data;

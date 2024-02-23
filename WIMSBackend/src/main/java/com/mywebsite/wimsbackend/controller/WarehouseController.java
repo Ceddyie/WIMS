@@ -1,8 +1,9 @@
 package com.mywebsite.wimsbackend.controller;
 
-import com.mywebsite.wimsbackend.entities.Orders;
-import com.mywebsite.wimsbackend.entities.ProductSelectionRequest;
-import com.mywebsite.wimsbackend.entities.StorageAssignmentRequest;
+import com.mywebsite.wimsbackend.entities.Product;
+import com.mywebsite.wimsbackend.entities.responses.Orders;
+import com.mywebsite.wimsbackend.entities.requests.ProductSelectionRequest;
+import com.mywebsite.wimsbackend.entities.requests.StorageAssignmentRequest;
 import com.mywebsite.wimsbackend.services.KafkaProducerService;
 import com.mywebsite.wimsbackend.services.OrderService;
 import com.mywebsite.wimsbackend.services.ProductService;
@@ -33,7 +34,7 @@ public class WarehouseController {
     private OrderService orderService;
 
     @GetMapping("/getProducts")
-    public List<ProductSelectionRequest> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
@@ -60,12 +61,12 @@ public class WarehouseController {
     }
 
     @PostMapping("/addProduct")
-    public ResponseEntity<ProductSelectionRequest> addProduct(@RequestBody ProductSelectionRequest request) {
+    public ResponseEntity<Product> addProduct(@RequestBody Product request) {
         System.out.println("------");
         System.out.println(request);
         System.out.println("------");
 
-        ResponseEntity<ProductSelectionRequest> productAdded = productService.addProduct(request);
+        ResponseEntity<Product> productAdded = productService.addProduct(request);
 
         System.out.println("------");
         System.out.println(productAdded.getBody());
@@ -74,12 +75,12 @@ public class WarehouseController {
     }
 
     @DeleteMapping("/deleteProduct/{id}")
-    public ResponseEntity<ProductSelectionRequest> deleteProduct(@PathVariable String id) {
+    public ResponseEntity<Product> deleteProduct(@PathVariable String id) {
         System.out.println("------");
         System.out.println("DELETE REQUEST FOR: " + id);
         System.out.println("------");
 
-        ResponseEntity<ProductSelectionRequest> productDeleted = productService.deleteProduct(id);
+        ResponseEntity<Product> productDeleted = productService.deleteProduct(id);
 
         System.out.println("------");
         System.out.println(productDeleted.getBody());

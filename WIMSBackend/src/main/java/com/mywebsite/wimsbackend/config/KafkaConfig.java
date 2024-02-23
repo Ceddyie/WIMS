@@ -1,6 +1,5 @@
 package com.mywebsite.wimsbackend.config;
 
-import com.mywebsite.wimsbackend.entities.StorageAssignmentRequest;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

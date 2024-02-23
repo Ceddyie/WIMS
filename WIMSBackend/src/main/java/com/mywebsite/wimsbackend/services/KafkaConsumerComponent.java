@@ -1,10 +1,16 @@
 package com.mywebsite.wimsbackend.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mywebsite.wimsbackend.controller.WarehouseController;
-import com.mywebsite.wimsbackend.entities.Orders;
+import com.mywebsite.wimsbackend.entities.responses.Assigned;
+import com.mywebsite.wimsbackend.entities.responses.Message;
+import com.mywebsite.wimsbackend.entities.responses.Orders;
+import com.mywebsite.wimsbackend.entities.responses.ProductLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,26 +29,58 @@ public class KafkaConsumerComponent {
     @Autowired
     private WarehouseController warehouseController;
 
-    @KafkaListener(topics = "test_topic")
-    public void listenTest(String message) {
-        long receivedTimestamp = System.currentTimeMillis();
-        long elapsedTime = receivedTimestamp - producer.sentTestTimestamp;
-        System.out.println("Received message " + message + " in " + elapsedTime + " ms");
-    }
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    ///////////////// PRODUCT SELECTION /////////////////
 
     @KafkaListener(topics = "product_selection_2")
     public void listen(String message) {
-        long receivedTimestamp = System.currentTimeMillis();
-        long elapsed = receivedTimestamp - producer.sentTimestamp;
-        System.out.println(message + " | Operation took " + elapsed + " ms");
-
-        this.messagingTemplate.convertAndSend("/topic/productSelection", message);
+        try {
+            ProductLocation productLocation = objectMapper.readValue(message, ProductLocation.class);
+            long measureTime = System.currentTimeMillis() - productLocation.getTimestamp();
+            System.out.println("Operation took " + measureTime + " ms");
+            String frontendMessage = "ProductID: " + productLocation.getProductId() +
+                    "\nAmount: " + productLocation.getAmount() +
+                    "\nStorage Location: " + productLocation.getStorageLocation();
+            System.out.println("Message: " + frontendMessage);
+            this.messagingTemplate.convertAndSend("/topic/productSelection", frontendMessage);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
+
+    @KafkaListener(topics = "product_selection_error")
+    public void listenError(String message) {
+        try {
+            Message messageObject = objectMapper.readValue(message, Message.class);
+            long measureTime = System.currentTimeMillis() - messageObject.getTimestamp();
+            System.out.println("Operation took " + measureTime + " ms");
+            String frontendMessage = messageObject.getMessage();
+            this.messagingTemplate.convertAndSend("/topic/productSelection", frontendMessage);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    ///////////////// STORAGE ASSIGNMENT //////////////////
 
     @KafkaListener(topics = "storage_assignment_2")
     public void receive(String message) {
-        System.out.println(message);
-        this.messagingTemplate.convertAndSend("/topic/storageAssignment", message);
+        try {
+            Assigned assigned = objectMapper.readValue(message, Assigned.class);
+            long measureTime =  System.currentTimeMillis() - assigned.getTimestamp();
+            System.out.println("Operation took " + measureTime + " ms");
+            String frontendMessage;
+            if (assigned.getAmount() == 0) {
+                frontendMessage = "ProductID: " + assigned.getProductId() + ", Storage Location: " + assigned.getStorageLocation();
+            } else {
+                frontendMessage = "ProductID: " + assigned.getProductId() + ", Amount: " + assigned.getAmount() + ", Storage Location: " + assigned.getStorageLocation();
+            }
+            this.messagingTemplate.convertAndSend("/topic/storageAssignment", frontendMessage);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @KafkaListener(topics = "order_topic")

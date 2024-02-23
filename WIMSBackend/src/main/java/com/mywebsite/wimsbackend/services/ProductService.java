@@ -1,6 +1,7 @@
 package com.mywebsite.wimsbackend.services;
 
-import com.mywebsite.wimsbackend.entities.ProductSelectionRequest;
+import com.mywebsite.wimsbackend.entities.Product;
+import com.mywebsite.wimsbackend.entities.requests.ProductSelectionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,11 @@ public class ProductService {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public List<ProductSelectionRequest> getAllProducts() {
-        return jdbcTemplate.query("SELECT * FROM product", new BeanPropertyRowMapper<>(ProductSelectionRequest.class));
+    public List<Product> getAllProducts() {
+        return jdbcTemplate.query("SELECT * FROM product", new BeanPropertyRowMapper<>(Product.class));
     }
 
-    public ResponseEntity<ProductSelectionRequest> addProduct(ProductSelectionRequest request) {
+    public ResponseEntity<Product> addProduct(Product request) {
         if (request.getImageUrl() == null)
             request.setImageUrl("https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg");
 
@@ -60,13 +61,13 @@ public class ProductService {
         }
     }
 
-    public ResponseEntity<ProductSelectionRequest> deleteProduct(String id) {
+    public ResponseEntity<Product> deleteProduct(String id) {
         System.out.println("Product delete request processing...");
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("productId", id);
 
-        List<ProductSelectionRequest> list = jdbcTemplate.query("SELECT * FROM product WHERE product_id = :productId", namedParameters, new BeanPropertyRowMapper<>(ProductSelectionRequest.class));
+        List<Product> list = jdbcTemplate.query("SELECT * FROM product WHERE product_id = :productId", namedParameters, new BeanPropertyRowMapper<>(Product.class));
 
         if (!list.isEmpty()) {
             jdbcTemplate.update("DELETE FROM product WHERE product_id = :productId", namedParameters);
