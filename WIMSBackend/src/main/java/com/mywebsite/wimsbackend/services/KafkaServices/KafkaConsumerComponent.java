@@ -1,7 +1,6 @@
-package com.mywebsite.wimsbackend.services;
+package com.mywebsite.wimsbackend.services.KafkaServices;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mywebsite.wimsbackend.controller.WarehouseController;
 import com.mywebsite.wimsbackend.entities.responses.Assigned;
@@ -10,7 +9,6 @@ import com.mywebsite.wimsbackend.entities.responses.Orders;
 import com.mywebsite.wimsbackend.entities.responses.ProductLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;

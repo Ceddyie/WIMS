@@ -4,13 +4,12 @@ import com.mywebsite.wimsbackend.entities.Product;
 import com.mywebsite.wimsbackend.entities.responses.Orders;
 import com.mywebsite.wimsbackend.entities.requests.ProductSelectionRequest;
 import com.mywebsite.wimsbackend.entities.requests.StorageAssignmentRequest;
-import com.mywebsite.wimsbackend.services.KafkaProducerService;
+import com.mywebsite.wimsbackend.services.KafkaServices.KafkaProducerService;
 import com.mywebsite.wimsbackend.services.OrderService;
 import com.mywebsite.wimsbackend.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -26,9 +25,6 @@ public class WarehouseController {
 
     @Autowired
     private ProductService productService;
-
-    @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Autowired
     private OrderService orderService;

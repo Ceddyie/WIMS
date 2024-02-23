@@ -1,4 +1,4 @@
-package com.mywebsite.wimsbackend.services;
+package com.mywebsite.wimsbackend.services.KafkaServices;
 
 import com.mywebsite.wimsbackend.entities.requests.ProductSelectionRequest;
 import com.mywebsite.wimsbackend.entities.requests.ShippedMessage;
@@ -14,7 +14,7 @@ public class KafkaProducerService {
     private static final String SHIPPED_TOPIC = "shipped_order";
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, Long> kafkaTemplate;
 
     @Autowired
     private KafkaTemplate<String, Object> objectKafkaTemplate;
