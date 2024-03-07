@@ -9,7 +9,7 @@ var Stomp = require("stompjs");
 export class WebSocketService {
 
   public connect() {
-    let socket = new SockJs('http://localhost:8080/socket');
+    let socket = new SockJs('http://localhost:8083/socket');
     let stompClient = Stomp.open(socket);
     return stompClient;
   }

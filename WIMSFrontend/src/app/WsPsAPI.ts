@@ -3,7 +3,7 @@ import SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
 
 export class WsPsAPI {
-    webSocketEndPoint: string = 'http://localhost:8080/ws';
+    webSocketEndPoint: string = 'http://localhost:8083/ws';
     topic1: string = "/topic/productSelection";
     stompClient: any;
     _productSelectionComponent!: ProductSelectionComponent;

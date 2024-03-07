@@ -3,7 +3,7 @@ import SockJS from "sockjs-client";
 import * as Stomp from 'stompjs';
 
 export class WsSaAPI {
-    webSocketEndPoint: string = 'http://localhost:8080/ws';
+    webSocketEndPoint: string = 'http://localhost:8083/ws';
     topic: string = "/topic/storageAssignment";
     stompClient: any;
     _storageAssignmentComponent!: StorageAssignmentComponent;

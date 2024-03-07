@@ -7,7 +7,7 @@ import {Product} from "../entities/Product";
   providedIn: 'root'
 })
 export class ProductService {
-  private basUrl = 'http://localhost:8080/warehouse';
+  private basUrl = 'http://localhost:8083/warehouse';
 
   constructor(private http: HttpClient) { }
 
